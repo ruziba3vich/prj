@@ -8,7 +8,7 @@ on:
 env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  DOCKER_IMAGE_NAME: test
+  DOCKER_IMAGE_NAME: test_ci_cd
   DOCKER_IMAGE_TAG: latest
   SERVER_USERNAME: ubuntu
   SERVER_IP: 3.123.17.5
@@ -31,8 +31,9 @@ jobs:
         run: |
           docker buildx create --use --name mybuilder
           docker buildx build --platform linux/amd64,linux/arm64 --push -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
+
       - name: Deploy image to server
-        users: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ env.SERVER_IP }}
           username: ${{ env.SERVER_USERNAME }}
