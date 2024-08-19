@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  DOCKER_USERNAME: prodonik
-  DOCKER_PASSWORD: #Dost0n1k
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   DOCKER_IMAGE_NAME: test
   DOCKER_IMAGE_TAG: latest
 
